@@ -59,8 +59,17 @@ const deleteSong = async (req, res, next) => {
 
 const getCountOfAllSongs = async (req, res) => {
     try {
-      const count = await Song.countDocuments({});
-      return res.status(200).json({count});
+      const totalSongs = await Song.countDocuments({});
+      const uniqueArtists = await Song.distinct('artist');
+      const uniqueAlgum = await Song.distinct('album');
+      const uniqueGenre = await Song.distinct('genre');
+
+      // Count the number of unique artists
+      const totalArtist = uniqueArtists.length;
+      const totalAlbum = uniqueAlgum.length;
+      const totalGenre = uniqueGenre.length;
+      
+      return res.status(200).json({totalSongs, totalArtist, totalAlbum, totalGenre});
     } catch (error) {
       throw new Error('Error counting documents: ' + error.message); // Throw error to handle it in the caller
     }
