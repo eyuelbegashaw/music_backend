@@ -11,6 +11,6 @@ import {
 router.get("/" , getSongs);
 router.post("/" , createSong);
 router.delete("/:id"  , deleteSong);
-router.put("/:id", protect , updateSong);
+router.put("/:id" , updateSong);
 
 export default router;

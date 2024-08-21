@@ -5,23 +5,19 @@ const songSchema = mongoose.Schema(
     title: {
       type: String,
       required: true,
-      unique: true,
     },
     artist: {
         type: String,
         required: true,
-        unique: true,
       },
-      album: {
+    album: {
         type: String,
         required: true,
-        unique: true,
       },
-      genre: {
+    genre: {
         type: String,
         required: true,
-        unique: true,
-      },
+    },
   },
   {
     timestamps: true,

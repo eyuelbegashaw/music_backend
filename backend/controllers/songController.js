@@ -1,4 +1,4 @@
-import Song from "../models/songModel";
+import Song from "../models/songModel.js";
 
 const createSong = async (req, res, next) => {
   try {
@@ -22,8 +22,9 @@ const getSongs = async (req, res, next) => {
 const updateSong = async (req, res, next) => {
   try {
     const song = await Song.findById(req.params.id);
-
+    
     if (song) {
+        let filter = {_id: req.params.id};
         let updatedSong = await Song.findOneAndUpdate(filter, req.body, {
             new: true,
             runValidators: true,
@@ -44,7 +45,7 @@ const deleteSong = async (req, res, next) => {
     const song = await Song.findById(req.params.id);
 
     if (song) {
-      await song.remove();
+      const result = await Song.deleteOne({ _id: req.params.id });
       return res.status(200).json({message: `Song ${req.params.id} removed`});
     } else {
       res.status(404);
