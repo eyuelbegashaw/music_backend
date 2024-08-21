@@ -56,4 +56,14 @@ const deleteSong = async (req, res, next) => {
   }
 };
 
-export {getSongs, createSong, updateSong, deleteSong};
+
+const getCountOfAllSongs = async (req, res) => {
+    try {
+      const count = await Song.countDocuments({});
+      return res.status(200).json({count});
+    } catch (error) {
+      throw new Error('Error counting documents: ' + error.message); // Throw error to handle it in the caller
+    }
+  };
+
+export {getSongs, createSong, updateSong, deleteSong, getCountOfAllSongs};
