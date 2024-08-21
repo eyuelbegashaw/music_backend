@@ -75,4 +75,24 @@ const getCountOfAllSongs = async (req, res) => {
     }
   };
 
-export {getSongs, createSong, updateSong, deleteSong, getCountOfAllSongs};
+
+  const getSongsByGenre = async (req, res) => {
+    try {
+      const genre = req.params.genre;
+      
+      if (!genre) {
+        return res.status(400).json({ error: 'Genre parameter is required' });
+      }
+
+      const songs = await Song.find({ genre: genre });
+  
+      if (songs.length === 0) {
+        return res.status(404).json({ message: 'No songs found for this genre' });
+      }
+      return res.status(200).json(songs);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+export {getSongs, createSong, updateSong, deleteSong, getCountOfAllSongs, getSongsByGenre};
