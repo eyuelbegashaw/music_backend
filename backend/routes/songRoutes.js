@@ -9,16 +9,17 @@ import {
   getCountOfAllSongs,
   getSongsByGenre,
   getArtistStats,
-  getSongsCountByAlbum
+  getSongsCountByAlbum,
 } from "../controllers/songController.js";
 
-router.get("/" , getSongs);
-router.get("/count" , getCountOfAllSongs);
-router.post("/" , createSong);
-router.delete("/:id"  , deleteSong);
-router.put("/:id" , updateSong);
-router.get("/:genre" , getSongsByGenre);
-router.get("/stat/:artist" , getArtistStats);
-router.get("/stat/album/:album" , getSongsCountByAlbum);
+router.get("/", getSongs);
+router.get("/count", getCountOfAllSongs);
+router.get("/stat/genre/:genre", getSongsByGenre);
+router.get("/stat/artist/:artist", getArtistStats);
+router.get("/stat/album/:album", getSongsCountByAlbum);
+
+router.post("/", createSong);
+router.put("/:id", updateSong);
+router.delete("/:id", deleteSong);
 
 export default router;
